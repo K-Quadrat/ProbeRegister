@@ -2,14 +2,59 @@
 #include <mysql/mysql.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <zconf.h>
 
+
+//TODO Test
 int main(void) {
-    MYSQL       *connection;    /* Der MySQL-Handler: Verbindung zum MySQL-Server */
-    MYSQL_RES   *ergebnis;  /* Ergebnis einer Abfrage */
-    char        abfrage[1000];  /* beinhaltet die Abfrage */
-    MYSQL_ROW   zeile;      /* Ergebniszeile */
-    int         anz;        /* Anzahl der Zeilen */
-    int         i;
+    MYSQL *connection;    /* Der MySQL-Handler: Verbindung zum MySQL-Server */
+    MYSQL_RES *ergebnis;  /* Ergebnis einer Abfrage */
+    char abfrage[1000];  /* beinhaltet die Abfrage */
+    MYSQL_ROW zeile;      /* Ergebniszeile */
+    int anz;        /* Anzahl der Zeilen */
+    int i;
+
+    /* Datenbank Login Details */
+    char host[] = "127.0.0.1";      /* Hostname */
+    char user[] = "root";           /* Benutzername */
+    char password[] = "ubuntu";         /* Passwort */
+    char db[] = "weiterbildung";  /* Datenbank */
+    int port = 1111;            /* Port */
+
+    /* SSH Connection Details */
+    char sshUser[] = "ubuntu";        /* SSH Benutzername */
+    char sshHost[] = "192.168.1.134"; /* SSH Hostname */
+    char sshLocalPort[] = "1111";           /* SSH local Port */
+
+    /* SSH Verbindungsdetails werden zusammengefügt */
+    char sshConnectString[80];
+    strcpy(sshConnectString, "ssh ");
+    strcat(sshConnectString, sshUser);         /* Benutzername */
+    strcat(sshConnectString, "@");
+    strcat(sshConnectString, sshHost);         /* Hostname */
+    strcat(sshConnectString, " -L ");
+    strcat(sshConnectString, sshLocalPort);    /* Local Port */
+    strcat(sshConnectString, ":localhost:3306 -f -N");
+
+    /*int sshid = system(sshConnectString);*/
+
+    /*printf("Rückgabewert von system %i\n", sshid);*/
+
+    /*
+    int sohnpid;
+    ((sohnpid = fork()) == 0);
+    {
+
+        printf("Gelesen:\n");
+        printf("sohnpid = %i:\n", sohnpid);
+
+        exit(0);
+
+    }*/
+
+
+
 
     connection = mysql_init(NULL);      /* Datenstruktur initalisieren */
 
