@@ -1,0 +1,10 @@
+INSERT INTO `pcs`.`Probe`
+(`customer_id`,
+`hardwareModel_id`,
+`uid`,
+`displayName`,
+`serial`,
+`maintenance`)
+VALUES
+("1","1","11111","utilite_thk","utilite_thk","0");
+
